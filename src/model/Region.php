@@ -7,5 +7,5 @@
 
     }
     $region =  new Region();
-    var_dump($region->all());
+    var_dump($region->findAll());
 ?>

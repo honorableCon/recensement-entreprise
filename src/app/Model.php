@@ -1,53 +1,42 @@
 <?php
 
     
-  require('utils.php');
+  require('Connect.php');
   
-  dotenv();
+  // dotenv();
 
   abstract class Model{
     protected $table;
-    protected $db;
-    private $user = DB_USERNAME;
-    private $pass = DB_PASSWORD;
-    private $dbname = DB_DATABASE;
+    protected Connect $db;
 
-
-    private function connect(){
-      try {
-        $this->db = new PDO("mysql:host=localhost;dbname=$this->dbname", 
-                            $this->user, $this->pass);
-        return $this->db;
-      } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage() . "<br/>";
-        die();
-      }
+    public function __construct(){
+      $this->db = Connect::getInstance();
     }
 
-    public function all(){
-      $requete = $this->connect()->prepare("select * from $this->table");
+    
+    public function findAll(){
+      $requete = $this->db->getConnection()->prepare("select * from $this->table");
       $requete->execute();
-      $resultats = $requete->fetchAll();
-      return $resultats;
+      return $requete->fetchAll();
     }
-    public function find($id){
+    
+    public function find(int $id){
       $idLabel = "id".ucfirst($this->table);
-      $requete = $this->connect()->prepare("select * from $this->table where $idLabel=$id");
+      $requete = $this->db->getConnection()->prepare("select * from $this->table where $idLabel=$id");
       $requete->execute();
-      $resultats = $requete->fetchAll();
-      return $resultats;
+      return $requete->fetchAll();
     }
 
-    public function insert($data){
+    public function insert(array $data){
       [$label, $labelValues] = parseDataToUsableRequete($data);
       
-      $insertRequete = $this->connect()->prepare("insert into $this->table($label) values ($labelValues)");
-      $insertRequete->execute($data) or die(print_r($this->db->errorInfo()));
+      $insertRequete = $this->db->getConnection()->prepare("insert into $this->table($label) values ($labelValues)");
+      $insertRequete->execute($data) or die(print_r($this->db->getConnection()->errorInfo()));
     }
 
-    public function delete($id){
+    public function delete(int $id){
       $idLabel = "id".ucfirst($this->table);
-      $requete = $this->connect()->prepare("delete from $this->table where $idLabel=$id");
+      $requete = $this->db->getConnection()->prepare("delete from $this->table where $idLabel=$id");
       return $requete->execute();
     }
   }
