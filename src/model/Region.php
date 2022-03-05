@@ -6,6 +6,4 @@
         protected $table = "region";
 
     }
-    $region =  new Region();
-    var_dump($region->findAll());
 ?>

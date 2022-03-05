@@ -1,0 +1,17 @@
+{
+    "name": "honorablecon/db-app",
+    "authors": [
+        {
+            "name": "Honorable con",
+            "email": "honorablecon@gmail.com"
+        }
+    ],
+    "require": {},
+
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
