@@ -2,7 +2,7 @@
 
     require(__DIR__."/../app/Model.php");
 
-    class Region extends Model{
+    class Entreprise extends Model{
         protected $table = "entreprise";
 
     } 

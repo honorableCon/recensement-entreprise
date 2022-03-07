@@ -23,4 +23,19 @@ function dotenv(){
   }
 }
 
+function validatePassword(string $pass){
+
+  $uppercase = preg_match('@[A-Z]@', $pass);
+  $lowercase = preg_match('@[a-z]@', $pass);
+  $number    = preg_match('@[0-9]@', $pass);
+  $specialChars = preg_match('@[^\w]@', $pass);
+  $badlength = strlen($pass) < 8 || strlen($pass) > 25;
+
+  if(!$uppercase || !$lowercase || !$number || !$specialChars || $badlength) {
+      return false;
+  }else{
+      return true;
+  }
+}
+
 ?>
