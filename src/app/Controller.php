@@ -9,7 +9,6 @@ class Controller{
     function __construct(){
       require_once(__DIR__."/../model/$this->model.php");
       $this->modelInstance = new $this->model();
-      // echo "drie"; die();
     }
 
     function view(string $file, array $data){

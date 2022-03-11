@@ -11,8 +11,6 @@ class LoginController extends Controller{
 
     function index(){
         session_start();
-        // var_dump($_SESSION['auth']);
-        // die();
         if(isset($_SESSION['auth']) ){
             header('Location: /dashboard');
         }else{
@@ -33,6 +31,8 @@ class LoginController extends Controller{
             ];
 
             $this->modelInstance->insert($data);
+            $this->view("index", []);
+            
         }else{
             $this->view("signup", []);
         }

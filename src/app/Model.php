@@ -39,5 +39,10 @@
       $requete = $this->db->getConnection()->prepare("delete from $this->table where $idLabel=$id");
       return $requete->execute();
     }
+
+    public function lastInsertId(){
+      $requete = $this->db->getConnection();
+      return $requete->lastInsertId();
+    }
   }
 ?>

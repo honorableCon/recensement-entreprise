@@ -1,7 +1,9 @@
 <?php
 
-    [,$controller, $action] = explode('/', $_SERVER['PATH_INFO']);
+    [,$controller, $action, $id] = explode('/', $_SERVER['PATH_INFO']);
 
+    
+    // die(var_dump($_SERVER['PATH_INFO']));
     if ($controller) {
         $controller = ucfirst($controller).'Controller';
         $action = $action ?? "index";
